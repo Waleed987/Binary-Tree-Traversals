@@ -99,7 +99,7 @@ void inOrderTraversal(node* temp) {
 }
 
 //you can make binary tree in level order traversal manner using this function.
-node* btlot(node* root) {
+node* buildTreeUsingLevelOrderTrav(node* root) {
 	queue<node*> q;
 	cout << "\nEnter data : ";
 	int data;
