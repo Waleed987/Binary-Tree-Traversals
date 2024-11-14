@@ -98,21 +98,43 @@ void inOrderTraversal(node* temp) {
 	inOrderTraversal(temp->right);
 }
 
+//you can make binary tree in level order traversal manner using this function.
+node* btlot(node* root) {
+	queue<node*> q;
+	cout << "\nEnter data : ";
+	int data;
+	cin >> data;
+	root = new node(data);
+	q.push(root);
+
+	while (!q.empty()) {
+		node* temp = q.front();
+		q.pop();
+
+		cout << "\nEnter data to insert to left of " << temp->data << " : ";
+		int leftdata;
+		cin >> leftdata;
+		if (leftdata != -1) {
+			temp->left = new node(leftdata);
+			q.push(temp->left);
+		}
+		
+		cout << "\nEnter data to insert to right of " << temp->data << " : ";
+		int rightdata;
+		cin >> rightdata;
+		if (rightdata != -1) {
+			temp->right = new node(rightdata);
+			q.push(temp->right);
+		}
+	}
+	return root;
+}
+
 int main() {
 
 	node* root = NULL;
-	root = buildtree(root);
-
-	levelOrderTraversal(root);
-	cout << endl;
 	
-	preOrderTraversal(root);
-	cout << endl;
-  
-	postOrderTraversal(root);
-	cout << endl;
-  
-	inOrderTraversal(root);
+	root = buildtree(root);
 
 	return 0;
 }
