@@ -130,6 +130,65 @@ node* buildTreeUsingLevelOrderTrav(node* root) {
 	return root;
 }
 
+node* minValNode(node* root) {
+	node* temp = root;
+	while (temp && temp->left != nullptr) {
+		temp = temp->left;
+	}
+	return temp;
+}
+
+node* deleteNode(node* root, int val) {
+	if (root == NULL) {
+		return root;
+	}
+
+	if (val < root->data) {
+		root->left = deletenode(root->left, val);
+	}
+	else if (val > root->data) {
+		root->right = deletenode(root->right, val);
+	}
+	else {
+		if (root->left == nullptr) {
+			node* temp = root->right;
+			delete(root);
+			return temp;
+		}
+		else if (root->right == nullptr) {
+			node* temp = root->left;
+			delete(root);
+			return temp;
+		}
+		
+		node* temp = minValNode(root->right);
+
+		root->data = temp->data;
+
+		root->right = deletenode(root->right, temp->data);
+
+	}
+
+	return root;
+
+}
+
+node* insertInBinaryTree(node* root , int val) {
+	if (root == NULL) {
+		node* newNode = new node(val);
+		return newNode;
+	}
+
+	else if (root->data > val) {
+		root->left = insertbt(root->left, val);
+	}
+
+	else if (root->data < val) {
+		root->right = insertbt(root->right, val);
+	}
+	return root;
+}
+
 int main() {
 
 	node* root = NULL;
